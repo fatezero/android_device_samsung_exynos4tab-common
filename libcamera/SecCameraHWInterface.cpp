@@ -166,21 +166,15 @@ void CameraHardwareSec::initDefaultParameters(int cameraId)
     mUseInternalISP = mSecCamera->getUseInternalISP();
 
     if (cameraId == SecCamera::CAMERA_ID_BACK) {
-        if (mUseInternalISP) {
-            //3H2
-            p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-                  "720x480,640x384,640x360,640x480,320x240,528x432,176x144");
-            p.set(CameraParameters::KEY_SUPPORTED_PICTURE_SIZES,
-                  "3248x2436,3216x2144,3200x1920,3072x1728,2592x1944,1920x1080,1440x1080,1280x720,1232x1008,800x480,720x480,640x480");
-            p.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
-                  "1920x1080,1280x720,640x480,176x144");
-        } else {
-            //M5MO
-            p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-                  "3264x2448,1920x1080,1280x720,800x480,720x480,640x480,320x240,528x432,176x144");
-            p.set(CameraParameters::KEY_SUPPORTED_PICTURE_SIZES,
-                  "3264x2448,3264x1968,2048x1536,2048x1232,800x480,640x480");
-        }
+#ifdef CONFIG_MACH_P2
+        p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
+              "1280x720,1024x768,1024x616,1024x552,800x600,720x480,640x480,528x432,352x288,320x240,176x144");
+#else /* CONFIG_MACH_P8 */
+        p.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
+              "1280x720,1024x768,1024x616,1024x576,800x600,720x480,640x480,528x432,352x288,320x240,176x144");
+#endif
+        p.set(CameraParameters::KEY_SUPPORTED_PICTURE_SIZES,
+              "2048x1536,2048x1232,640x480");
     } else {
         if (mUseInternalISP) {
             //6A3

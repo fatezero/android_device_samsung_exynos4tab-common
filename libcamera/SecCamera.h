@@ -99,11 +99,23 @@ namespace android {
 #define JOIN_AGAIN(x, y) x ## y
 
 #define FRONT_CAM S5K5BAFX
-#define BACK_CAM M5MO
+#define BACK_CAM S5K5CCGX
 
 #if !defined (FRONT_CAM) || !defined(BACK_CAM)
 #error "Please define the Camera module"
 #endif
+
+#define S5K5CCGX_PREVIEW_WIDTH          1024
+#define S5K5CCGX_PREVIEW_HEIGHT         768
+#define S5K5CCGX_SNAPSHOT_WIDTH         2048
+#define S5K5CCGX_SNAPSHOT_HEIGHT        1536
+#define S5K5CCGX_THUMBNAIL_WIDTH        320
+#define S5K5CCGX_THUMBNAIL_HEIGHT       240
+/* don't know if the following 3 settings are correct */
+#define S5K5CCGX_THUMBNAIL_BPP          16
+#define S5K5CCGX_FPS                    30
+/* focal length of 3.43mm */
+#define S5K5CCGX_FOCAL_LENGTH           343
 
 #define M5MO_PREVIEW_WIDTH              640
 #define M5MO_PREVIEW_HEIGHT             480
