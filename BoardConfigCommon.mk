@@ -49,6 +49,7 @@ TARGET_PROVIDES_INIT_TARGET_RC := true
 
 BOARD_NAND_PAGE_SIZE := 4096
 BOARD_NAND_SPARE_SIZE := 128
+BOARD_KERNEL_BASE := 0x40000000
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -112,9 +113,18 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/ath6kl.ko"
 WIFI_DRIVER_MODULE_NAME          := ath6kl
+WIFI_DRIVER_LOADER_DELAY         := 1000000
 
-# kernel
+# Charging Mode (LPM)
+BOARD_CHARGING_MODE_BOOTING_LPM := "/sys/class/power_supply/battery/batt_lp_charging"
+
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/smdk4210
+
+CLEAN_MODULES:
+	arm-eabi-strip --strip-debug `find $(KERNEL_MODULES_OUT) -name *.ko`
+
+TARGET_KERNEL_MODULES := CLEAN_MODULES
 
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/exynos4tab-common/bootimg.mk
 
